@@ -1,0 +1,22 @@
+{
+  "name": "dots",
+  "version": "0.0.0",
+  "description": "",
+  "dependencies": {
+    "lodash": "^3.6.0"
+  },
+  "devDependencies": {
+    "babel": "^4.7.16",
+    "babelify": "^5.0.4",
+    "mocha": "^2.2.1",
+    "babelify": "^2.4.0"
+  },
+  "scripts": {
+    "build": "mkdir -p dist & browserify -t babelify src/app.js > dist/app.js & cp src/static/* dist",
+    "watch": "watchify -t babelify src/app.js -o dist/app.js",
+    "test": "mocha --compilers js:babel/register",
+    "gh": "mkdir -p gh-pages & cp dist/* gh-pages"
+  },
+  "author": "Matthew Brandly",
+  "license": "MIT"
+}
