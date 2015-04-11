@@ -7,15 +7,16 @@
   },
   "devDependencies": {
     "babel": "^4.7.16",
-    "babelify": "^5.0.4",
+    "babelify": "^2.4.0",
     "mocha": "^2.2.1",
-    "babelify": "^2.4.0"
+    "uglify-js": "^2.4.19"
   },
   "scripts": {
-    "build": "mkdir -p dist & browserify -t babelify src/app.js > dist/app.js & cp src/static/* dist",
+    "build": "mkdir -p dist && browserify -t babelify src/app.js > dist/app.js && cp src/static/* dist",
     "watch": "watchify -t babelify src/app.js -o dist/app.js",
     "test": "mocha --compilers js:babel/register",
-    "gh": "mkdir -p gh-pages & cp dist/* gh-pages"
+    "gh": "mkdir -p gh-pages && cp dist/* gh-pages && uglifyjs dist/app.js --compress --mangle > gh-pages/app.js",
+    "clean": "rm dist/* && rmdir dist"
   },
   "author": "Matthew Brandly",
   "license": "MIT"

@@ -10,10 +10,6 @@ export default class Canvas {
     return this.el
   }
 
-  getContext() {
-    return this.context
-  }
-
   setWidth(width) {
     this.el.width = width
   }
@@ -28,6 +24,10 @@ export default class Canvas {
 
   setFillColor(color) {
     this.context.fillStyle = color
+  }
+
+  setLineWidth(width) {
+    this.context.lineWidth = width
   }
 
   clear() {

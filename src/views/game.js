@@ -88,7 +88,7 @@ export default class Game {
 
     if (activeDot) {
       canvas.setStrokeColor(this.game.getActiveColor())
-      canvas.getContext().lineWidth = this.dotDiameter / 4
+      canvas.setLineWidth(this.dotDiameter / 4)
 
       const linePoints = this.game.getSelectedDots().map(d => {
         return this.dotPointToDrawPoint(this.board.getPointForDot(d))
