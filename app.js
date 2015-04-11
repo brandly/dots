@@ -11822,7 +11822,7 @@ new GameView("#game", {
   width: Math.min(innerHeight, innerWidth),
   game: new GameModel({
     size: 6,
-    colors: ["#FF0000", "#00FF00", "#00FFFF", "#0000FF", "#FF00FF"]
+    colors: ["#F15C3B", "#89ED90", "#E7DD00", "#8ABDFF", "#9D5AB7"]
   })
 });
 
@@ -12319,9 +12319,14 @@ var Canvas = (function () {
         this.el.height = height;
       }
     },
-    setDrawColor: {
-      value: function setDrawColor(color) {
+    setStrokeColor: {
+      value: function setStrokeColor(color) {
         this.context.strokeStyle = color;
+      }
+    },
+    setFillColor: {
+      value: function setFillColor(color) {
+        this.context.fillStyle = color;
       }
     },
     clear: {
@@ -12330,9 +12335,10 @@ var Canvas = (function () {
       }
     },
     drawCircle: {
-      value: function drawCircle(position) {
-        // TODO: lol find a better way
-        this.drawLine(position, { x: position.x + 1, y: position.y });
+      value: function drawCircle(position, diameter) {
+        this.context.beginPath();
+        this.context.arc(position.x, position.y, diameter / 2, 0, 2 * Math.PI, false);
+        this.context.fill();
       }
     },
     drawLine: {
@@ -12496,7 +12502,7 @@ var Game = (function () {
         var activeDot = this.game.getActiveDot();
 
         if (activeDot) {
-          canvas.setDrawColor(this.game.getActiveColor());
+          canvas.setStrokeColor(this.game.getActiveColor());
           canvas.getContext().lineWidth = this.dotDiameter / 4;
 
           var linePoints = this.game.getSelectedDots().map(function (d) {
@@ -12514,14 +12520,10 @@ var Game = (function () {
       value: function drawDots(canvas) {
         var _this = this;
 
-        var context = this.canvas.getContext();
-        context.lineWidth = this.dotDiameter;
-        context.lineJoin = "round";
-
         this.board.applyToAllDots(function (dot, x, y) {
           var location = _this.dotPointToDrawPoint(new Point(x, y));
-          canvas.setDrawColor(dot.getColor());
-          canvas.drawCircle(location);
+          canvas.setFillColor(dot.getColor());
+          canvas.drawCircle(location, _this.dotDiameter);
         });
       }
     },
