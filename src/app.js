@@ -8,6 +8,6 @@ new GameView('#game', {
   width: Math.min(innerHeight, innerWidth),
   game: new GameModel({
     size: 6,
-    colors: ['#FF0000', '#00FF00', '#00FFFF', '#0000FF', '#FF00FF']
+    colors: ['#F15C3B', '#89ED90', '#E7DD00', '#8ABDFF', '#9D5AB7']
   })
 })

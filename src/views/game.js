@@ -87,7 +87,7 @@ export default class Game {
     const activeDot = this.game.getActiveDot()
 
     if (activeDot) {
-      canvas.setDrawColor(this.game.getActiveColor())
+      canvas.setStrokeColor(this.game.getActiveColor())
       canvas.getContext().lineWidth = this.dotDiameter / 4
 
       const linePoints = this.game.getSelectedDots().map(d => {
@@ -102,14 +102,10 @@ export default class Game {
   }
 
   drawDots(canvas) {
-    const context = this.canvas.getContext()
-    context.lineWidth = this.dotDiameter
-    context.lineJoin = 'round'
-
     this.board.applyToAllDots((dot, x, y) => {
       const location = this.dotPointToDrawPoint(new Point(x, y))
-      canvas.setDrawColor(dot.getColor())
-      canvas.drawCircle(location)
+      canvas.setFillColor(dot.getColor())
+      canvas.drawCircle(location, this.dotDiameter)
     })
   }
 

@@ -22,17 +22,22 @@ export default class Canvas {
     this.el.height = height
   }
 
-  setDrawColor(color) {
+  setStrokeColor(color) {
     this.context.strokeStyle = color
+  }
+
+  setFillColor(color) {
+    this.context.fillStyle = color
   }
 
   clear() {
     this.el.width = this.el.width
   }
 
-  drawCircle(position) {
-    // TODO: lol find a better way
-    this.drawLine(position, {x: position.x + 1, y: position.y})
+  drawCircle(position, diameter) {
+    this.context.beginPath()
+    this.context.arc(position.x, position.y, diameter / 2, 0, 2 * Math.PI, false)
+    this.context.fill()
   }
 
   drawLine(start, end) {
