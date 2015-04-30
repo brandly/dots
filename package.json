@@ -7,9 +7,11 @@
   },
   "devDependencies": {
     "babel": "^4.7.16",
-    "babelify": "^2.4.0",
+    "babelify": "^6.0.2",
+    "browserify": "^9.0.8",
     "mocha": "^2.2.1",
-    "uglify-js": "^2.4.19"
+    "uglify-js": "^2.4.19",
+    "watchify": "^3.2.0"
   },
   "scripts": {
     "build": "mkdir -p dist && browserify -t babelify src/app.js > dist/app.js && cp src/static/* dist",
