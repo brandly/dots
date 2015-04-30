@@ -4,6 +4,7 @@ import Board from './board'
 
 export default class Game extends ChangeEmitter {
   constructor({ size, colors }) {
+    super()
     this.board = new Board({ size, colors })
 
     this.selectedDots = []

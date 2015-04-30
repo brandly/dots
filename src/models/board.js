@@ -7,6 +7,7 @@ const CLEAR_DOT_EVENT = 'CLEAR_DOT'
 
 export default class Board extends ChangeEmitter {
   constructor({ size, colors }) {
+    super()
     this.size = size
     this.colors = colors
     this.dots = []
