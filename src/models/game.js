@@ -86,12 +86,28 @@ export default class Game extends ChangeEmitter {
       // TODO: remove dots inside of circuit too
       this.board.removeArrayOfDots(this.selectedDots)
     }
-    // TODO: if no moves exist, clear a particular color or something?
+
+    while (!this.hasLegalMove()) {
+      this.board.removeDotsOfColor(this.board.getRandomColor())
+    }
+
     this.clearSelectedDots()
   }
 
   hasClosedCircuit() {
     return unique(this.selectedDots).length !== this.selectedDots.length
+  }
+
+  hasLegalMove() {
+    const dots = this.board.getAllDots()
+
+    for (let i = 0; i < dots.length; i++) {
+      if (this.board.getAdjacentDotsOfSameColor(dots[i]).length) {
+        return true
+      }
+    }
+
+    return false
   }
 
   isSelectedDot(dot) {

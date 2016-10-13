@@ -104,6 +104,16 @@ export default class Board extends ChangeEmitter {
     }
   }
 
+  getAllDots() {
+    const allDots = []
+    for (let x = 0; x < this.size; x++) {
+      for (let y = 0; y < this.size; y++) {
+        allDots.push(this.dots[x][y])
+      }
+    }
+    return allDots
+  }
+
   makeDotsFall(column) {
     return sortBy(column, function (dot) {
       if (dot === null) {
