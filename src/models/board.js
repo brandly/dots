@@ -68,7 +68,7 @@ export default class Board extends ChangeEmitter {
   }
 
   getDotsOfColor(color) {
-    return flatten(this.dots).filter(d => d.color === color)
+    return this.getAllDots().filter(d => d.color === color)
   }
 
   removeDotsOfColor(color) {
@@ -105,13 +105,7 @@ export default class Board extends ChangeEmitter {
   }
 
   getAllDots() {
-    const allDots = []
-    for (let x = 0; x < this.size; x++) {
-      for (let y = 0; y < this.size; y++) {
-        allDots.push(this.dots[x][y])
-      }
-    }
-    return allDots
+    return flatten(this.dots)
   }
 
   makeDotsFall(column) {

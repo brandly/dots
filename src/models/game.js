@@ -81,9 +81,9 @@ export default class Game extends ChangeEmitter {
 
   releaseBoard() {
     if (this.hasClosedCircuit()) {
+      // TODO: remove dots inside of circuit too
       this.board.removeDotsOfColor(this.getActiveColor())
     } else if (this.hasSelectedMultipleDots()) {
-      // TODO: remove dots inside of circuit too
       this.board.removeArrayOfDots(this.selectedDots)
     }
 
