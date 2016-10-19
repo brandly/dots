@@ -3,12 +3,19 @@ import Canvas from './canvas'
 import Point from '../models/point'
 
 export default class Game {
-  constructor(selector, data) {
+  constructor(insertionPoint, data) {
     this.game = data.game
     this.board = this.game.getBoard()
 
-    this.root = document.querySelector(selector)
-    this.width = data.width
+    if (insertionPoint instanceof Element) {
+      this.root = insertionPoint
+    } else if (typeof insertionPoint === 'string') {
+      this.root = document.querySelector(insertionPoint)
+    } else {
+      throw new Error('Invalid insertionPoint. Not an Element or a selector')
+    }
+
+    this.width = this.root.clientWidth
     this.height = this.width
 
     this.distanceBetweenDots = this.width / this.game.getSize()
@@ -16,7 +23,11 @@ export default class Game {
     this.dotDiameter = this.margin
     this.touchPoint = null
 
-    this.initCanvas(this.root)
+    this.initCanvas()
+    this.initScoreboard()
+
+    this.root.appendChild(this.scoreboard)
+    this.root.appendChild(this.canvas.getElement())
 
     this.drawGame()
     this.game.addChangeListener(this._onChange.bind(this))
@@ -33,15 +44,17 @@ export default class Game {
     })
   }
 
-  initCanvas(container) {
+  initCanvas() {
     this.canvas = new Canvas
     this.canvas.setWidth(this.width)
     this.canvas.setHeight(this.height)
-    container.appendChild(this.canvas.getElement())
+  }
+
+  initScoreboard() {
+    this.scoreboard = document.createElement('div')
   }
 
   _onChange() {
-    console.log('SCORE:', this.game.score)
     this.drawGame()
   }
 
@@ -81,6 +94,7 @@ export default class Game {
     this.canvas.clear()
     this.drawLines(this.canvas)
     this.drawDots(this.canvas)
+    this.scoreboard.innerHTML = `<p class="scoreboard">score ${this.game.score}</p>`
   }
 
   drawLines(canvas) {

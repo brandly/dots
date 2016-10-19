@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+}
+
+#game {
+  width: 600px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.scoreboard {
+  margin: 12px;
+}
