@@ -14,7 +14,8 @@
     "watchify": "^3.2.0"
   },
   "scripts": {
-    "build": "mkdir -p dist && browserify -t babelify src/app.js > dist/app.js && cp src/static/* dist",
+    "build": "mkdir -p dist && browserify -t babelify src/app.js > dist/app.js && npm run static",
+    "static": "cp src/static/* dist",
     "watch": "watchify -t babelify src/app.js -o dist/app.js",
     "test": "mocha --compilers js:babel/register",
     "gh": "mkdir -p gh-pages && cp dist/* gh-pages && uglifyjs dist/app.js --compress --mangle > gh-pages/app.js",
